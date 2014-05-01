@@ -1,0 +1,28 @@
+{
+  "name": "omxctrl",
+  "version": "0.1.0",
+  "description": "simple omxplayer wrapper for node",
+  "main": "omxctrl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xat/omxctrl"
+  },
+  "keywords": [
+    "omxplayer",
+    "wrapper",
+    "raspberry"
+  ],
+  "author": {
+    "name": "Simon Kusterer",
+    "email": "simon@sope.io",
+    "url": "http://sope.io"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xat/omxctrl/issues"
+  },
+  "homepage": "https://github.com/xat/omxctrl"
+}
