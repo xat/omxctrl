@@ -22,6 +22,7 @@ var keys = {
   decreaseSubtitleDelay: 'd',
   increaseSubtitleDelay: 'f',
   pause: 'p', // toggle between pause and play
+  stop: 'q',
   decreaseVolume: '-',
   increaseVolume: '+',
   seekForward: "\x5b\x43",
@@ -75,12 +76,6 @@ omx.prototype.init = function(file, opts) {
 omx.prototype.send = function(key) {
   if (!this.player || this.state === STATES.ENDED) return;
   this.player.stdin.write(key);
-};
-
-// quit omxplayer
-omx.prototype.stop = function() {
-  if (!this.player) return;
-  this.send('q');
 };
 
 // check if omxplayer is playing
