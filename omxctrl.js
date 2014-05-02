@@ -6,7 +6,8 @@ var defaults = ['-o hdmi'];
 
 var STATES = {
   PLAYING: 0,
-  ENDED: 1
+  PAUSED: 1,
+  IDLE: 2
 };
 
 var keys = {
@@ -33,7 +34,7 @@ var keys = {
 
 var omx = function() {
   if (!(this instanceof omx)) return new omx();
-  this.state = STATES.ENDED;
+  this.state = STATES.IDLE;
 };
 
 util.inherits(omx, EventEmitter);
@@ -48,7 +49,7 @@ omx.prototype.play = function(file, opts) {
   // quit any existing instance
   this.stop();
 
-  if (this.state === STATES.ENDED) {
+  if (this.state === STATES.IDLE) {
     return this.init(file, opts);
   }
 
@@ -66,7 +67,7 @@ omx.prototype.init = function(file, opts) {
   this.state = STATES.PLAYING;
 
   this.player.on('exit', function() {
-    this.state = STATES.ENDED;
+    this.state = STATES.IDLE;
     this.player = null;
     this.emit('ended');
   }.bind(this));
@@ -74,13 +75,19 @@ omx.prototype.init = function(file, opts) {
 
 // send a key command to omxplayer
 omx.prototype.send = function(key) {
-  if (!this.player || this.state === STATES.ENDED) return;
+  if (!this.player || this.state === STATES.IDLE) return;
   this.player.stdin.write(key);
 };
 
-// check if omxplayer is playing
-omx.prototype.isPlaying = function() {
-  return this.state === STATES.PLAYING;
+// check the current state
+omx.prototype.getState = function() {
+  return this.state;
+};
+
+omx.prototype.pause = function() {
+  if (this.state === STATES.IDLE) return;
+  this.state = (this.state === STATES.IDLE) ? STATES.PLAYING : STATES.PAUSED;
+  this.send('p');
 };
 
 // build some nice methods for interacting

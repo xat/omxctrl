@@ -1,6 +1,6 @@
 {
   "name": "omxctrl",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "simple omxplayer wrapper for node",
   "main": "omxctrl.js",
   "scripts": {

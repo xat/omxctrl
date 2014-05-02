@@ -12,7 +12,6 @@ var omx = require('omxctrl');
 
 omx.play('whatever.mp4'); // Start Playback
 omx.stop(); // kill the omxplayer instance
-omx.isPlaying(); // Returns true if a video is playing
 
 // While a Video is playing the following self-explaining
 // methods can be used
@@ -53,8 +52,6 @@ omx.on('ended', function() {
 ```
 
 ### Installation
-
-#### Node.JS
 
 ```
 npm install omxctrl
